@@ -15,7 +15,7 @@ const App = () => {
   function alerttaxt() {
     setExit(!exit);
     console.log("");
-    console.log("");
+   
   }
   // function Checkboxset() {
   //   // setTaskvalue([{...taskvalue, checkbox: !taskvalue.checkbox }]);
