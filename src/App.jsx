@@ -14,6 +14,8 @@ const App = () => {
   const [checkbox, setCheckbox] = useState([]);
   function alerttaxt() {
     setExit(!exit);
+    console.log("");
+    console.log("");
   }
   // function Checkboxset() {
   //   // setTaskvalue([{...taskvalue, checkbox: !taskvalue.checkbox }]);
