@@ -19,7 +19,7 @@ const App = () => {
   //   // setTaskvalue([{...taskvalue, checkbox: !taskvalue.checkbox }]);
   // }
   function Checkboxset(index) {
-    setCheckbox([...checkbox, checkbox[index] = !checkbox[index]]);
+    setCheckbox([...checkbox, (checkbox[index] = !checkbox[index])]);
     console.log(checkbox[index]);
   }
   function delettask() {}
