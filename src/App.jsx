@@ -7,6 +7,7 @@ import Task from "./components/Task";
 import InputTaxt from "./components/InputTaxt";
 import { useState } from "react";
 import { CgLayoutGrid } from "react-icons/cg";
+// import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [exit, setExit] = useState(true);
@@ -42,6 +43,7 @@ const App = () => {
     setTaskvalue([
       ...taskvalue,
       {
+        
         texttsak: value,
         time: now.toLocaleTimeString(),
         year: now.toLocaleDateString(),
@@ -66,7 +68,11 @@ const App = () => {
         </div>
         <div className=" w-3/5 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg bg-graylite overflow-auto drop-shadow">
           {taskvalue.map((task, index) => (
-            <Task task={task} key={index} Checkboxset={()=>Checkboxset(index)} />
+            <Task
+              task={task}
+              key={index}
+              Checkboxset={() => Checkboxset(index)}
+            />
           ))}
         </div>
       </main>
