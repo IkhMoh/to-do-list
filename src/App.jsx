@@ -11,33 +11,45 @@ import { CgLayoutGrid } from "react-icons/cg";
 const App = () => {
   const [exit, setExit] = useState(true);
   const [taskvalue, setTaskvalue] = useState([]);
-  const [checkbox, setCheckbox] = useState([]);
+  // const [checkbox, setCheckbox] = useState([]);
   function alerttaxt() {
     setExit(!exit);
-    console.log("");
   }
   // function Checkboxset() {
   //   // setTaskvalue([{...taskvalue, checkbox: !taskvalue.checkbox }]);
   // }
-  function Checkboxset(index) {
-    setCheckbox([...checkbox, (checkbox[index] = !checkbox[index])]);
-    console.log(checkbox[index]);
-  }
+
   function delettask() {}
   function edetetask() {}
+  function Checkboxset(key) {
+    setTaskvalue(
+      taskvalue.map((task1) =>
+        key === task1.index ? { ...task1, checkbox: true } : task1
+      )
+    );
+    Supmit()
+  }
   function Supmit(value) {
     const now = new Date();
+
     setTaskvalue([
       ...taskvalue,
       {
         texttsak: value,
         time: now.toLocaleTimeString(),
         year: now.toLocaleDateString(),
+        checkbox: false,
       },
     ]);
-    setCheckbox([...checkbox, false]);
+    // setCheckbox([...checkbox, false]);
   }
-
+  function Checkboxset(key) {
+    setTaskvalue(
+      taskvalue.map((task1) =>
+        key === task1.index ? { ...task1, checkbox: true } : task1
+      )
+    );
+  }
   return (
     <div className="h-lvh overflow-hidden ">
       <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
@@ -56,7 +68,7 @@ const App = () => {
             return (
               <Task
                 Checkboxset={() => Checkboxset(index)}
-                checkbox={checkbox}
+                checkbox={taskvalue.checkbox}
                 key={index}
                 taxt={task.texttsak}
                 time={task.time}
