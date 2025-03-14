@@ -1,19 +1,20 @@
 import { MdCheckBoxOutlineBlank, MdCheckBox, MdDelete } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 
-const Task = ({ year, time, taxt, checkbox, Checkboxset, key }) => {
+const Task = ({ task,Checkboxset }) => {
+  // console.log(key)
   return (
     <div className="bg-withe shadow-lg mx-7 my-5 h-16  rounded-lg flex justify-between ">
       <div className="flex ml-2 space-x-2">
         <span className="mt-3.5 ">
-          {checkbox ? (
+          {task.checkbox ? (
             <MdCheckBox
-              onClick={() => {Checkboxset(key);}}
+              onClick={()=>{Checkboxset();console.log("jjj")}}
               className="w-9 h-9 text-asasy cursor-pointer hover:drop-shadow transition"
             />
           ) : (
             <MdCheckBoxOutlineBlank
-              onClick={() => {Checkboxset(key);}}
+              onClick={()=>{Checkboxset() ;console.log("kiki")}}
               className="w-9 h-9 text-gray cursor-pointer hover:drop-shadow transition"
             />
           )}
@@ -21,13 +22,13 @@ const Task = ({ year, time, taxt, checkbox, Checkboxset, key }) => {
         <div className="mt-2">
           <h2>
             <span>👉 </span>
-            <span className={checkbox ? "line-through " : ""}>
-              {taxt}
+            <span className={task.checkbox ? "line-through " : ""}>
+              {task.taxt}
               <span>👀</span>
             </span>
           </h2>
           <h5>
-            <span>{time}</span> ,<span>{year}</span>
+            <span>{task.time}</span> ,<span>{task.year}</span>
           </h5>
         </div>
       </div>

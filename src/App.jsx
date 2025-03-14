@@ -21,17 +21,24 @@ const App = () => {
 
   function delettask() {}
   function edetetask() {}
-  function Checkboxset(key) {
+  // function Checkboxset(key) {
+
+  //   setTaskvalue(
+  //     taskvalue.map((task1) =>
+  //       key === task1.index ? { ...task1, checkbox: true } : task1
+  //     )
+  //   );
+  // }
+  function Checkboxset(index) {
+    console.log(taskvalue[0]);
     setTaskvalue(
       taskvalue.map((task1) =>
-        key === task1.index ? { ...task1, checkbox: true } : task1
+        task1.id === index ? { checkbox: !task1.checkbox } : task1
       )
     );
-    Supmit()
   }
   function Supmit(value) {
     const now = new Date();
-
     setTaskvalue([
       ...taskvalue,
       {
@@ -43,13 +50,7 @@ const App = () => {
     ]);
     // setCheckbox([...checkbox, false]);
   }
-  function Checkboxset(key) {
-    setTaskvalue(
-      taskvalue.map((task1) =>
-        key === task1.index ? { ...task1, checkbox: true } : task1
-      )
-    );
-  }
+
   return (
     <div className="h-lvh overflow-hidden ">
       <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
@@ -64,18 +65,9 @@ const App = () => {
           </div>
         </div>
         <div className=" w-3/5 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg bg-graylite overflow-auto drop-shadow">
-          {taskvalue.map((task, index) => {
-            return (
-              <Task
-                Checkboxset={() => Checkboxset(index)}
-                checkbox={taskvalue.checkbox}
-                key={index}
-                taxt={task.texttsak}
-                time={task.time}
-                year={task.year}
-              />
-            );
-          })}
+          {taskvalue.map((task, index) => (
+            <Task task={task} key={index} Checkboxset={()=>Checkboxset(index)} />
+          ))}
         </div>
       </main>
     </div>
