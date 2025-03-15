@@ -1,40 +1,47 @@
-// import {useState} from "react";
 import "./App.css";
 import AddTask from "./components/AddTask";
 import Filter from "./components/Filter";
-// import Hero from "./components/Hero";
 import Task from "./components/Task";
 import InputTaxt from "./components/InputTaxt";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CgLayoutGrid } from "react-icons/cg";
-// import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
+// import EditTaxt from "./components/EditTaxt";
 
 const App = () => {
   const [exit, setExit] = useState(true);
-  const [taskvalue, setTaskvalue] = useState([]);
-  // const [checkbox, setCheckbox] = useState([]);
+  const [taskvalue, setTaskvalue] = useState(
+    localStorage.getItem("the_data_of_list")
+      ? JSON.parse(localStorage.getItem("the_data_of_list"))
+      : []
+  );
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem("the_data");
+  //   setTaskvalue(JSON.parse(data));
+  // });
+  useEffect(() => {
+    window.localStorage.setItem("the_data_of_list", JSON.stringify(taskvalue));
+  }, [taskvalue]);
+
   function alerttaxt() {
     setExit(!exit);
   }
-  // function Checkboxset() {
-  //   // setTaskvalue([{...taskvalue, checkbox: !taskvalue.checkbox }]);
-  // }
 
-  function delettask() {}
-  function edetetask() {}
-  // function Checkboxset(key) {
-
+  function delettask(id) {
+    setTaskvalue(taskvalue.filter((task1) => task1.id !== id));
+  }
+  // function Edit(id) {
   //   setTaskvalue(
   //     taskvalue.map((task1) =>
-  //       key === task1.index ? { ...task1, checkbox: true } : task1
+  //       task1.id == id ? { ...task1, isEdit: !task1.isEdit } : task1
   //     )
   //   );
   // }
-  function Checkboxset(index) {
-    console.log(taskvalue[0]);
+
+  function Checkboxset(id) {
     setTaskvalue(
       taskvalue.map((task1) =>
-        task1.id === index ? { checkbox: !task1.checkbox } : task1
+        task1.id == id ? { ...task1, checkbox: !task1.checkbox } : task1
       )
     );
   }
@@ -43,19 +50,21 @@ const App = () => {
     setTaskvalue([
       ...taskvalue,
       {
-        
+        isEdit: true,
+        id: uuidv4(),
         texttsak: value,
         time: now.toLocaleTimeString(),
         year: now.toLocaleDateString(),
         checkbox: false,
       },
     ]);
-    // setCheckbox([...checkbox, false]);
   }
 
   return (
     <div className="h-lvh overflow-hidden ">
       <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
+      {/* {taskvalue.isEdit ? "" : <EditTaxt taskvalue={taskvalue}  />} */}
+
       <main className="bg-prim    h-lvh mx-10 my-8 ">
         <div>
           <h1 className="font-bold text-6xl text-center text-text">
@@ -71,7 +80,9 @@ const App = () => {
             <Task
               task={task}
               key={index}
-              Checkboxset={() => Checkboxset(index)}
+              Checkboxset={Checkboxset}
+              delettask={delettask}
+              // Edit={Edit}
             />
           ))}
         </div>

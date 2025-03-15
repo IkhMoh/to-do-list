@@ -12,7 +12,7 @@ const InputTaxt = ({ alerttax, exit, Supmit }) => {
             ? "hidden"
             : "z-50 fixed  h-screen w-screen bg-[#4e4e4e5a] flex justify-center "
         }
-      >
+        >
         <div className="bg-white  h-3/9 w-1/3 flex mt-32 rounded-md justify-center ">
           <div className="">
             <input
@@ -37,7 +37,6 @@ const InputTaxt = ({ alerttax, exit, Supmit }) => {
               >
                 Supmit
               </button>
-             
             </div>
           </div>
         </div>
