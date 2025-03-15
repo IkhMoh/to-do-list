@@ -1,1 +1,9 @@
 @import "tailwindcss";
+:root {
+  --prim: #f8f9ff;
+  --asasy:#6270ef;
+  --gray:#cccedf,
+  --graylite: #ecedf6;
+  --text: #66667f;
+  --withe: #ffffff;
+}

@@ -23,7 +23,7 @@ const InputTaxt = ({ alerttax, exit, Supmit }) => {
             <div className=" flex justify-end mt-16 ">
               <button
                 onClick={alerttax}
-                className="py-1.5 px-9 bg-white text-black border-2 font-bold rounded-md hover:shadow-md mx-2"
+                className="py-1.5 px-9 bg-[var(--gray)] text-[var(--text)] border-2 font-bold rounded-md hover:shadow-md mx-2"
               >
                 Exit
               </button>
@@ -33,7 +33,7 @@ const InputTaxt = ({ alerttax, exit, Supmit }) => {
                   Supmit(inputref.current.value);
                   inputref.current.value = "";
                 }}
-                className="py-2 px-9 bg-black text-white font-bold rounded-md hover:shadow-md"
+                className="py-2 px-9 bg-[var(--asasy)] text-white font-bold rounded-md hover:shadow-md"
               >
                 Supmit
               </button>

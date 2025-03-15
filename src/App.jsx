@@ -4,8 +4,9 @@ import Filter from "./components/Filter";
 import Task from "./components/Task";
 import InputTaxt from "./components/InputTaxt";
 import { useState, useEffect } from "react";
-import { CgLayoutGrid } from "react-icons/cg";
 import { v4 as uuidv4 } from "uuid";
+import "./index.css";
+
 // import EditTaxt from "./components/EditTaxt";
 
 const App = () => {
@@ -65,9 +66,9 @@ const App = () => {
       <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
       {/* {taskvalue.isEdit ? "" : <EditTaxt taskvalue={taskvalue}  />} */}
 
-      <main className="bg-prim    h-lvh mx-10 my-8 ">
+      <main className="bg-[var(--prim)]  h-lvh mx-10 my-8 ">
         <div>
-          <h1 className="font-bold text-6xl text-center text-text">
+          <h1 className="font-bold text-6xl text-center  text-[var(--text)]">
             <span className=" mt-3">TODO LIST</span>
           </h1>
           <div className="w-3/5 mx-auto mt-24 flex justify-between">
@@ -75,7 +76,7 @@ const App = () => {
             <Filter />
           </div>
         </div>
-        <div className=" w-3/5 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg bg-graylite overflow-auto drop-shadow">
+        <div className=" w-3/5 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg  bg-[var(--graylite)] overflow-auto drop-shadow">
           {taskvalue.map((task, index) => (
             <Task
               task={task}
