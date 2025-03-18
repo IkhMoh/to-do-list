@@ -66,17 +66,17 @@ const App = () => {
       <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
       {/* {taskvalue.isEdit ? "" : <EditTaxt taskvalue={taskvalue}  />} */}
 
-      <main className="bg-[var(--prim)]  h-lvh mx-10 my-8 ">
+      <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
         <div>
-          <h1 className="font-bold text-6xl text-center  text-[var(--text)]">
+          <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">
             <span className=" mt-3">TODO LIST</span>
           </h1>
-          <div className="w-3/5 mx-auto mt-24 flex justify-between">
+          <div className="w-8/9 lg:w-5/6 mx-auto mt-24 flex justify-between">
             <AddTask alerttaxt={alerttaxt} exit={exit} />
             <Filter />
           </div>
         </div>
-        <div className=" w-3/5 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg  bg-[var(--graylite)] overflow-auto drop-shadow">
+        <div className="   lg:w-5/6 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg  bg-[var(--graylite)] overflow-auto drop-shadow">
           {taskvalue.map((task, index) => (
             <Task
               task={task}
