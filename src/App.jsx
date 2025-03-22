@@ -6,12 +6,13 @@ import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./index.css";
+// import "./index.css";
 
 const App = () => {
   const [exit, setExit] = useState(true);
   const [exitEdit, setExitEdit] = useState(true);
   const [newTaxt, setNewTaxt] = useState({ value: "", idd: 0 });
+  const [filterButton, setFilterButton] = useState("all");
   const [taskvalue, setTaskvalue] = useState(
     localStorage.getItem("the_data_of_list")
       ? JSON.parse(localStorage.getItem("the_data_of_list"))
@@ -66,7 +67,17 @@ const App = () => {
       },
     ]);
   }
+  const nocheck = taskvalue.filter((task) => !task.checkbox);
 
+  const check = taskvalue.filter((task) => task.checkbox);
+ let finalfilter = taskvalue;
+  if (filterButton == "non") {
+    finalfilter = nocheck;
+  } else if (filterButton == "yas") {
+    finalfilter = check;
+  } else {
+    finalfilter = taskvalue;
+  }
   return (
     <div className="h-lvh overflow-hidden ">
       <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
@@ -85,11 +96,14 @@ const App = () => {
           </h1>
           <div className="w-8/9 lg:w-5/6 mx-auto mt-24 flex justify-between">
             <AddTask alerttaxt={alerttaxt} exit={exit} />
-            <Filter />
+            <Filter
+              setFilterButton={setFilterButton}
+              filterButton={filterButton}
+            />
           </div>
         </div>
         <div className="   lg:w-5/6 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg  bg-[var(--graylite)] overflow-auto drop-shadow">
-          {taskvalue.map((task, index) => (
+          {finalfilter.map((task, index) => (
             <Task
               task={task}
               key={index}

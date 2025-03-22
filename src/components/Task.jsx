@@ -3,7 +3,7 @@ import { FiEdit3 } from "react-icons/fi";
 
 const Task = ({ task, Checkboxset, delettask, alertEdit, bb }) => {
   return (
-    <div className="bg-[var(--withe)]  shadow-lg mx-7 my-5 h-16  rounded-lg flex justify-between ">
+    <div className="bg-[var(--withe)]  shadow-lg mx-7 my-5 h-18  rounded-lg flex justify-between ">
       <div className="flex ml-2 space-x-2  w-11/12  whitespace-nowrap overflow-hidden ">
         <span className="mt-3.5 ">
           {task.checkbox ? (
