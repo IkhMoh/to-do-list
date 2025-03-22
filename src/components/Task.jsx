@@ -1,7 +1,7 @@
 import { MdCheckBoxOutlineBlank, MdCheckBox, MdDelete } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 
-const Task = ({ task, Checkboxset, delettask, Edit }) => {
+const Task = ({ task, Checkboxset, delettask, alertEdit, bb }) => {
   return (
     <div className="bg-[var(--withe)]  shadow-lg mx-7 my-5 h-16  rounded-lg flex justify-between ">
       <div className="flex ml-2 space-x-2  w-11/12  whitespace-nowrap overflow-hidden ">
@@ -34,7 +34,9 @@ const Task = ({ task, Checkboxset, delettask, Edit }) => {
       <div className="flex md:mr-4 mt-4 sm:space-x-1 md:space-x-4">
         <span>
           <FiEdit3
-            onClick={() => Edit(task.id)}
+            onClick={() => {
+              alertEdit(), bb(task.id);
+            }}
             className="w-7 h-7 md:w-8 md:h-8 text-[var(--text)] bg-[var(--graylite)] p-0.5 sm:p-1.5 rounded cursor-pointer hover:drop-shadow transition"
           />
         </span>
