@@ -37,13 +37,13 @@ const Task = ({ task, Checkboxset, delettask, alertEdit, bb }) => {
             onClick={() => {
               alertEdit(), bb(task.id);
             }}
-            className="w-7 h-7 md:w-8 md:h-8 text-[var(--text)] bg-[var(--graylite)] p-0.5 sm:p-1.5 rounded cursor-pointer hover:drop-shadow transition"
+            className="w-7 h-7 md:w-8 md:h-8 text-[var(--text)] bg-[var(--graylite)] mr-2 sm:mr-0 p-1 sm:p-1.5 rounded cursor-pointer hover:drop-shadow transition"
           />
         </span>
-        <span>
+        <span >
           <MdDelete
             onClick={() => delettask(task.id)}
-            className="w-7 h-7 md:w-8 md:h-8 text-[var(--text)] bg-[var(--graylite)] p-0.5 sm:p-1 rounded cursor-pointer hover:drop-shadow transition"
+            className="w-7 h-7 md:w-8 md:h-8 text-[var(--text)] bg-[var(--graylite)] mr-2 md:mr-0 p-1 sm:p-1 rounded cursor-pointer hover:drop-shadow transition"
           />
         </span>
       </div>
