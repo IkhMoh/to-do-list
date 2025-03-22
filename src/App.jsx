@@ -4,7 +4,7 @@ import Filter from "./components/Filter";
 import Task from "./components/Task";
 import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 // import "./index.css";
 
@@ -67,10 +67,14 @@ const App = () => {
       },
     ]);
   }
-  const nocheck = taskvalue.filter((task) => !task.checkbox);
+  const nocheck = useMemo(() => {
+    return taskvalue.filter((task) => !task.checkbox);
+  }, [taskvalue]);
 
-  const check = taskvalue.filter((task) => task.checkbox);
- let finalfilter = taskvalue;
+  const check = useMemo(() => {
+    return taskvalue.filter((task) => task.checkbox);
+  }, [taskvalue]);
+  let finalfilter = taskvalue;
   if (filterButton == "non") {
     finalfilter = nocheck;
   } else if (filterButton == "yas") {
