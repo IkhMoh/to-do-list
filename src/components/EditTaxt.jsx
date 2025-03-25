@@ -1,6 +1,6 @@
 import "react";
 const EditTaxt = ({
-  alertEdit,
+  handleAlertEdit,
   exitEdit,
   newTaxt,
   setNewTaxt,
@@ -27,7 +27,7 @@ const EditTaxt = ({
             />
             <div className=" flex justify-end mt-16 mr-2  md:mr-4 ">
               <button
-                onClick={alertEdit}
+                onClick={handleAlertEdit}
                 className="py-1.5 px-9 bg-[var(--gray)] text-[var(--text)] border-2 font-bold rounded-md hover:shadow-md mx-2"
               >
                 Exit

@@ -23,14 +23,14 @@ const App = () => {
     window.localStorage.setItem("the_data_of_list", JSON.stringify(taskvalue));
   }, [taskvalue]);
 
-  function alerttaxt() {
+  function handleAlertTaxt() {
     setExit(!exit);
   }
-  function alertEdit() {
+  function handleAlertEdit() {
     setExitEdit(!exitEdit);
   }
 
-  function delettask(id) {
+  function handleDeletTaskClick(id) {
     setTaskvalue(taskvalue.filter((task1) => task1.id !== id));
   }
 
@@ -42,25 +42,26 @@ const App = () => {
     );
     setExitEdit(!exitEdit);
   }
-  function bb(id) {
+  function shawuId(id) {
     taskvalue.map((task1) =>
       task1.id == id ? setNewTaxt({ value: task1.texttsak, idd: id }) : task1
     );
   }
-  function Checkboxset(id) {
+
+  function handleCheckboxClick(id) {
     setTaskvalue(
       taskvalue.map((task1) =>
         task1.id == id ? { ...task1, checkbox: !task1.checkbox } : task1
       )
     );
   }
-  function Supmit(value) {
+  function handleSupmitClick(newTaxt) {
     const now = new Date();
     setTaskvalue([
       ...taskvalue,
       {
         id: uuidv4(),
-        texttsak: value,
+        texttsak: newTaxt,
         time: now.toLocaleTimeString(),
         year: now.toLocaleDateString(),
         checkbox: false,
@@ -74,6 +75,7 @@ const App = () => {
   const check = useMemo(() => {
     return taskvalue.filter((task) => task.checkbox);
   }, [taskvalue]);
+
   let finalfilter = taskvalue;
   if (filterButton == "non") {
     finalfilter = nocheck;
@@ -84,9 +86,13 @@ const App = () => {
   }
   return (
     <div className="h-lvh overflow-hidden ">
-      <InputTaxt alerttax={alerttaxt} exit={exit} Supmit={Supmit} />
+      <InputTaxt
+        handleAlertTaxt={handleAlertTaxt}
+        exit={exit}
+        handleSupmitClick={handleSupmitClick}
+      />
       <EditTaxt
-        alertEdit={alertEdit}
+        handleAlertEdit={handleAlertEdit}
         exitEdit={exitEdit}
         setNewTaxt={setNewTaxt}
         newTaxt={newTaxt}
@@ -99,7 +105,7 @@ const App = () => {
             <span className=" mt-3">TODO LIST</span>
           </h1>
           <div className="w-8/9 lg:w-5/6 mx-auto mt-24 flex justify-between">
-            <AddTask alerttaxt={alerttaxt} exit={exit} />
+            <AddTask handleAlertTaxt={handleAlertTaxt} exit={exit} />
             <Filter
               setFilterButton={setFilterButton}
               filterButton={filterButton}
@@ -111,10 +117,10 @@ const App = () => {
             <Task
               task={task}
               key={index}
-              Checkboxset={Checkboxset}
-              delettask={delettask}
-              alertEdit={alertEdit}
-              bb={bb}
+              handleCheckboxClick={handleCheckboxClick}
+              handleDeletTaskClick={handleDeletTaskClick}
+              handleAlertEdit={handleAlertEdit}
+              shawuId={shawuId}
             />
           ))}
         </div>
