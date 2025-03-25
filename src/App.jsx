@@ -6,6 +6,7 @@ import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
 import { useState, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Settings from "./components/Settings";
 // import "./index.css";
 
 const App = () => {
@@ -104,7 +105,7 @@ const App = () => {
           <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">
             <span className=" mt-3">TODO LIST</span>
           </h1>
-          <div className="w-8/9 lg:w-5/6 mx-auto mt-24 flex justify-between">
+          <div className="w-8/9 lg:w-5/6 mx-auto mt-20 flex justify-between">
             <AddTask handleAlertTaxt={handleAlertTaxt} exit={exit} />
             <Filter
               setFilterButton={setFilterButton}
@@ -124,6 +125,7 @@ const App = () => {
             />
           ))}
         </div>
+       {/* <Settings/> */}
       </main>
     </div>
   );
