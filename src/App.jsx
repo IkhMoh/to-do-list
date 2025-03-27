@@ -7,6 +7,7 @@ import InputTaxt from "./components/InputTaxt";
 import { useState, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Settings from "./components/Settings";
+import Home from "./components/Home";
 // import "./index.css";
 
 const App = () => {
@@ -101,7 +102,7 @@ const App = () => {
       />
 
       <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
-        <div>
+        {/* <div>
           <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">
             <span className=" mt-3">TODO LIST</span>
           </h1>
@@ -124,8 +125,19 @@ const App = () => {
               shawuId={shawuId}
             />
           ))}
-        </div>
-       {/* <Settings/> */}
+        </div> */}
+        <Home
+          handleCheckboxClick={handleCheckboxClick}
+          handleDeletTaskClick={handleDeletTaskClick}
+          handleAlertEdit={handleAlertEdit}
+          shawuId={shawuId}
+          finalfilter={finalfilter}
+          handleAlertTaxt={handleAlertTaxt}
+          exit={exit}
+          setFilterButton={setFilterButton}
+          filterButton={filterButton}
+        />
+        {/* <Settings/> */}
       </main>
     </div>
   );
