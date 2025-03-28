@@ -1,2 +1,2 @@
 import { createContext } from "react";
-export const ChangeEmoji = createContext({});
+export const Emoji = createContext({});

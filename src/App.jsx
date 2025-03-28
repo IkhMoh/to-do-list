@@ -6,7 +6,7 @@ import { useState, useEffect, useMemo, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Settings from "./components/Settings";
 import Home from "./components/Home";
-import { ChangeEmoji } from "./contexts/changeEmoji";
+import { Emoji } from "./contexts/changeEmoji";
 
 const App = () => {
   const [exit, setExit] = useState(true);
@@ -107,7 +107,7 @@ const App = () => {
         newTaxt={newTaxt}
         handleEditClick={handleEditClick}
       />
-      <ChangeEmoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>
+      <Emoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>
         <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
           {/* <div>
           <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">
@@ -153,7 +153,7 @@ const App = () => {
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
-      </ChangeEmoji.Provider>
+      </Emoji.Provider>
     </div>
   );
 };

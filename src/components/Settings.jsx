@@ -1,10 +1,10 @@
 import React from "react";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { ChangeEmoji } from "../contexts/changeEmoji";
+import { Emoji } from "../contexts/changeEmoji";
 import { useContext } from "react";
 const Settings = () => {
-  const { emoji, setEmoji, newEmoji, setNewEmoji } = useContext(ChangeEmoji);
+  const { emoji, setEmoji, newEmoji, setNewEmoji } = useContext(Emoji);
 
   function handleSaveClick() {
     setEmoji({

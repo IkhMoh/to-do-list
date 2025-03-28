@@ -5,7 +5,6 @@ import Task from "./Task";
 import { MdSettingsSuggest } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-
 const Home = ({
   handleAlertTaxt,
   exit,
