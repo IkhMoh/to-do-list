@@ -4,6 +4,8 @@ import Filter from "./Filter";
 import Task from "./Task";
 import { MdSettingsSuggest } from "react-icons/md";
 import { Link } from "react-router-dom";
+
+
 const Home = ({
   handleAlertTaxt,
   exit,
@@ -27,7 +29,7 @@ const Home = ({
             <MdSettingsSuggest />
           </Link>
         </h1>
-        <div className="w-8/9 lg:w-5/6 mx-auto mt-20 flex justify-between">
+        <div className="w-8/9 lg:w-5/6 mx-auto mt-12 flex justify-between">
           <AddTask handleAlertTaxt={handleAlertTaxt} exit={exit} />
           <Filter
             setFilterButton={setFilterButton}

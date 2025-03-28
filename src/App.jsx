@@ -11,12 +11,12 @@ import { ChangeEmoji } from "./contexts/changeEmoji";
 const App = () => {
   const [exit, setExit] = useState(true);
   const [exitEdit, setExitEdit] = useState(true);
-  const [emoji, setEmoji] = useState({
-    first: "👉",
-    second: "👀",
-    yas: "✔",
-    no: "❌",
-  });
+  const [emoji, setEmoji] = useState(
+    localStorage.getItem("the_data_of_emogi")
+      ? JSON.parse(localStorage.getItem("the_data_of_emogi"))
+      : { first: "👉", second: "👀", yas: "✔", no: "❌" }
+  );
+  const [newEmoji, setNewEmoji] = useState(emoji);
   const [newTaxt, setNewTaxt] = useState({ value: "", idd: 0 });
   const [filterButton, setFilterButton] = useState("all");
   const [taskvalue, setTaskvalue] = useState(
@@ -28,6 +28,9 @@ const App = () => {
   useEffect(() => {
     window.localStorage.setItem("the_data_of_list", JSON.stringify(taskvalue));
   }, [taskvalue]);
+  useEffect(() => {
+    window.localStorage.setItem("the_data_of_emogi", JSON.stringify(emoji));
+  }, [emoji]);
 
   function handleAlertTaxt() {
     setExit(!exit);
@@ -104,7 +107,7 @@ const App = () => {
         newTaxt={newTaxt}
         handleEditClick={handleEditClick}
       />
-      <ChangeEmoji.Provider value={{ emoji, setEmoji }}>
+      <ChangeEmoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>
         <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
           {/* <div>
           <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">

@@ -1,7 +1,9 @@
 import { MdCheckBoxOutlineBlank, MdCheckBox, MdDelete } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
-
+import { ChangeEmoji } from "../contexts/changeEmoji";
+import { useContext } from "react";
 const Task = ({ task, handleCheckboxClick, handleDeletTaskClick, handleAlertEdit, shawuId }) => {
+  const { emoji, setEmoji } = useContext(ChangeEmoji);
   return (
     <div className="bg-[var(--withe)]  shadow-lg mx-7 my-5 h-18  rounded-lg flex justify-between ">
       <div className="flex ml-2 space-x-2  w-11/12  whitespace-nowrap overflow-hidden ">
@@ -20,11 +22,11 @@ const Task = ({ task, handleCheckboxClick, handleDeletTaskClick, handleAlertEdit
         </span>
         <div className="mt-1.5 sm:mt-2 space-y-2 sm:space-y-0.5 ">
           <h2 className="text-sm sm:text-lg   max-h-10">
-            <span>👉 </span>
+            <span>{emoji.first} </span>
             <span className={task.checkbox ? "line-through  " : "  "}>
               {task.texttsak}
             </span>{" "}
-            <span> 👀</span>
+            <span> {emoji.second}</span>
           </h2>
           <h5 className="text-sm sm:text-lg ">
             <span>{task.time}</span> <span>{task.year}</span>

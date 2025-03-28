@@ -1,6 +1,8 @@
 import "react";
-
+import { ChangeEmoji } from "../contexts/changeEmoji";
+import { useContext } from "react";
 const Filter = ({ setFilterButton, filterButton }) => {
+  const { emoji, setEmoji } = useContext(ChangeEmoji);
   return (
     <div className="  bg-transparent h-fit w-fit md:text-xl drop-shadow-lg text-[var(--text)] font-bold rounded-lg flex justify-between hover:drop-shadow transition">
       <button
@@ -23,7 +25,7 @@ const Filter = ({ setFilterButton, filterButton }) => {
             : " cursor-pointer transition  pl-2 sm:pl-5 pr-2 sm:pr-5 py-1.5 sm:py-2.5 border-2 mx-0.5 rounded-lg"
         }
       >
-        ✔
+        {emoji.yas}
       </button>
       <button
         value="non"
@@ -34,7 +36,7 @@ const Filter = ({ setFilterButton, filterButton }) => {
             : " cursor-pointer transition pl-2 sm:pl-5 pr-2 sm:pr-5 py-1.5 sm:py-2.5  border-2 rounded-lg"
         }
       >
-        ❌
+        {emoji.no}
       </button>
     </div>
   );
