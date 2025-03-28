@@ -3,7 +3,7 @@ import AddTask from "./AddTask";
 import Filter from "./Filter";
 import Task from "./Task";
 import { MdSettingsSuggest } from "react-icons/md";
-
+import { Link } from "react-router-dom";
 const Home = ({
   handleAlertTaxt,
   exit,
@@ -19,10 +19,13 @@ const Home = ({
     <>
       <div>
         <h1 className="font-bold grid text-5xl md:text-6xl relative text-[var(--text)]">
-          <span className="justify-self-center mt-3 absolute ">
-            TODO LIST
-          </span>
-          <MdSettingsSuggest className=" justify-self-end h-14 w-14 p-0.5 mr-6 mt-5  text-gray-500 transition drop-shadow-lg" />
+          <span className="justify-self-center mt-3 absolute ">TODO LIST</span>
+          <Link
+            className="justify-self-end h-14 w-14 p-0.5 mr-6 mt-5  text-gray-500 transition drop-shadow-lg"
+            to="/settings"
+          >
+            <MdSettingsSuggest />
+          </Link>
         </h1>
         <div className="w-8/9 lg:w-5/6 mx-auto mt-20 flex justify-between">
           <AddTask handleAlertTaxt={handleAlertTaxt} exit={exit} />

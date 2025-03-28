@@ -1,18 +1,22 @@
 import "./App.css";
-import AddTask from "./components/AddTask";
-import Filter from "./components/Filter";
-import Task from "./components/Task";
+import { Routes, Route } from "react-router-dom";
 import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Settings from "./components/Settings";
 import Home from "./components/Home";
-// import "./index.css";
+import { ChangeEmoji } from "./contexts/changeEmoji";
 
 const App = () => {
   const [exit, setExit] = useState(true);
   const [exitEdit, setExitEdit] = useState(true);
+  const [emoji, setEmoji] = useState({
+    first: "👉",
+    second: "👀",
+    yas: "✔",
+    no: "❌",
+  });
   const [newTaxt, setNewTaxt] = useState({ value: "", idd: 0 });
   const [filterButton, setFilterButton] = useState("all");
   const [taskvalue, setTaskvalue] = useState(
@@ -100,9 +104,9 @@ const App = () => {
         newTaxt={newTaxt}
         handleEditClick={handleEditClick}
       />
-
-      <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
-        {/* <div>
+      <ChangeEmoji.Provider value={{ emoji, setEmoji }}>
+        <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
+          {/* <div>
           <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">
             <span className=" mt-3">TODO LIST</span>
           </h1>
@@ -126,19 +130,27 @@ const App = () => {
             />
           ))}
         </div> */}
-        <Home
-          handleCheckboxClick={handleCheckboxClick}
-          handleDeletTaskClick={handleDeletTaskClick}
-          handleAlertEdit={handleAlertEdit}
-          shawuId={shawuId}
-          finalfilter={finalfilter}
-          handleAlertTaxt={handleAlertTaxt}
-          exit={exit}
-          setFilterButton={setFilterButton}
-          filterButton={filterButton}
-        />
-        {/* <Settings/> */}
-      </main>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  handleCheckboxClick={handleCheckboxClick}
+                  handleDeletTaskClick={handleDeletTaskClick}
+                  handleAlertEdit={handleAlertEdit}
+                  shawuId={shawuId}
+                  finalfilter={finalfilter}
+                  handleAlertTaxt={handleAlertTaxt}
+                  exit={exit}
+                  setFilterButton={setFilterButton}
+                  filterButton={filterButton}
+                />
+              }
+            />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </main>
+      </ChangeEmoji.Provider>
     </div>
   );
 };
