@@ -19,10 +19,10 @@ const Home = ({
   return (
     <>
       <div>
-        <h1 className="font-bold grid text-5xl md:text-6xl relative text-[var(--text)]">
+        <h1 className="font-bold grid text-[2.625rem] md:text-6xl relative text-[var(--text)] ">
           <span className="justify-self-center mt-3 absolute ">TODO LIST</span>
           <Link
-            className="justify-self-end h-14 w-14 p-0.5 mr-6 mt-5  text-gray-500 transition drop-shadow-lg"
+            className="justify-self-end h-14 w-14 p-0.5   md:mr-6 mt-3  text-gray-500 transition drop-shadow-lg"
             to="/settings"
           >
             <MdSettingsSuggest />
