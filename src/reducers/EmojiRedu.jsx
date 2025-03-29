@@ -12,12 +12,8 @@ const EmojiRedu = (currentEmoji, action) => {
       return emoji;
     }
     case "dataEmofromLocalStorage": {
-      const Storage = JSON.parse(localStorage.getItem("the_data_of_emogi")) ?? {
-        first: "👉",
-        second: "👀",
-        yas: "✔",
-        no: "❌",
-      };
+      const Storage =
+        JSON.parse(localStorage.getItem("the_data_of_emogi")) ?? currentEmoji;
       return Storage;
     }
     default:
