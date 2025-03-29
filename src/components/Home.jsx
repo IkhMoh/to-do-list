@@ -5,17 +5,7 @@ import Task from "./Task";
 import { MdSettingsSuggest } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const Home = ({
-  handleAlertTaxt,
-  exit,
-  setFilterButton,
-  filterButton,
-  finalfilter,
-  handleCheckboxClick,
-  handleDeletTaskClick,
-  handleAlertEdit,
-  shawuId,
-}) => {
+const Home = ({ finalfilter }) => {
   return (
     <>
       <div>
@@ -29,23 +19,13 @@ const Home = ({
           </Link>
         </h1>
         <div className="w-8/9 lg:w-5/6 mx-auto mt-12 flex justify-between">
-          <AddTask handleAlertTaxt={handleAlertTaxt} exit={exit} />
-          <Filter
-            setFilterButton={setFilterButton}
-            filterButton={filterButton}
-          />
+          <AddTask />
+          <Filter />
         </div>
       </div>
       <div className="   lg:w-5/6 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg  bg-[var(--graylite)] overflow-auto drop-shadow">
         {finalfilter.map((task, index) => (
-          <Task
-            task={task}
-            key={index}
-            handleCheckboxClick={handleCheckboxClick}
-            handleDeletTaskClick={handleDeletTaskClick}
-            handleAlertEdit={handleAlertEdit}
-            shawuId={shawuId}
-          />
+          <Task task={task} key={index} />
         ))}
       </div>
     </>

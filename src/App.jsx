@@ -2,12 +2,13 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
-import { useState, useEffect, useMemo, useContext } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Settings from "./components/Settings";
 import Home from "./components/Home";
 import { Emoji } from "./contexts/changeEmoji";
-
+import { Handles } from "./contexts/handles";
+import { State_of_List } from "./contexts/State_of_List";
 const App = () => {
   const [exit, setExit] = useState(true);
   const [exitEdit, setExitEdit] = useState(true);
@@ -94,67 +95,47 @@ const App = () => {
     finalfilter = taskvalue;
   }
   return (
-    <div className="h-lvh overflow-hidden ">
-      <InputTaxt
-        handleAlertTaxt={handleAlertTaxt}
-        exit={exit}
-        handleSupmitClick={handleSupmitClick}
-      />
-      <EditTaxt
-        handleAlertEdit={handleAlertEdit}
-        exitEdit={exitEdit}
-        setNewTaxt={setNewTaxt}
-        newTaxt={newTaxt}
-        handleEditClick={handleEditClick}
-      />
-      <Emoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>
-        <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
-          {/* <div>
-          <h1 className="font-bold text-5xl md:text-6xl text-center  text-[var(--text)]">
-            <span className=" mt-3">TODO LIST</span>
-          </h1>
-          <div className="w-8/9 lg:w-5/6 mx-auto mt-20 flex justify-between">
-            <AddTask handleAlertTaxt={handleAlertTaxt} exit={exit} />
-            <Filter
-              setFilterButton={setFilterButton}
-              filterButton={filterButton}
-            />
-          </div>
-        </div>
-        <div className="   lg:w-5/6 h-3/5 max-h-fit min-h-16 mx-auto mt-3 rounded-lg  bg-[var(--graylite)] overflow-auto drop-shadow">
-          {finalfilter.map((task, index) => (
-            <Task
-              task={task}
-              key={index}
-              handleCheckboxClick={handleCheckboxClick}
-              handleDeletTaskClick={handleDeletTaskClick}
-              handleAlertEdit={handleAlertEdit}
-              shawuId={shawuId}
-            />
-          ))}
-        </div> */}
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  handleCheckboxClick={handleCheckboxClick}
-                  handleDeletTaskClick={handleDeletTaskClick}
-                  handleAlertEdit={handleAlertEdit}
-                  shawuId={shawuId}
-                  finalfilter={finalfilter}
-                  handleAlertTaxt={handleAlertTaxt}
-                  exit={exit}
-                  setFilterButton={setFilterButton}
-                  filterButton={filterButton}
-                />
-              }
-            />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </main>
-      </Emoji.Provider>
-    </div>
+    <>
+      <div className="h-lvh overflow-hidden ">
+        <InputTaxt
+          handleAlertTaxt={handleAlertTaxt}
+          exit={exit}
+          handleSupmitClick={handleSupmitClick}
+        />
+        <EditTaxt
+          handleAlertEdit={handleAlertEdit}
+          exitEdit={exitEdit}
+          setNewTaxt={setNewTaxt}
+          newTaxt={newTaxt}
+          handleEditClick={handleEditClick}
+        />
+        <Handles.Provider
+          value={{
+            handleAlertTaxt,
+            handleCheckboxClick,
+            handleDeletTaskClick,
+            handleAlertEdit,
+            shawuId,
+          }}
+        >
+          <Emoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>
+            <State_of_List.Provider
+              value={{ exit, setFilterButton, filterButton }}
+            >
+              <main className="bg-[var(--prim)]  h-lvh mx-3 sm:mx-10 my-8 ">
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<Home finalfilter={finalfilter} />}
+                  />
+                  <Route path="/settings" element={<Settings />} />
+                </Routes>
+              </main>
+            </State_of_List.Provider>
+          </Emoji.Provider>
+        </Handles.Provider>
+      </div>
+    </>
   );
 };
 

@@ -1,8 +1,10 @@
 import "react";
 import { Emoji } from "../contexts/changeEmoji";
 import { useContext } from "react";
-const Filter = ({ setFilterButton, filterButton }) => {
+import { State_of_List } from "../contexts/State_of_List";
+const Filter = () => {
   const { emoji, setEmoji } = useContext(Emoji);
+  const { filterButton, setFilterButton } = useContext(State_of_List);
   return (
     <div className="  bg-transparent h-fit w-fit md:text-xl drop-shadow-lg text-[var(--text)] font-bold rounded-lg flex justify-between hover:drop-shadow transition">
       <button
