@@ -45,6 +45,17 @@ const todoRedu = (currentTodo, action) => {
 
       return taskvalue;
     }
+    case "ShawuId": {
+      currentTodo.map((task1) =>
+        task1.id == action.payload.id
+          ? action.payload.setNewTaxt({
+              value: task1.texttsak,
+              idd: action.payload.id,
+            })
+          : task1
+      );
+      return currentTodo;
+    }
     case "dataFromloLocalStorage": {
       const Storage =
         JSON.parse(localStorage.getItem("the_data_of_list")) ?? [];

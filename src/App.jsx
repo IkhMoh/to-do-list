@@ -3,21 +3,21 @@ import { Routes, Route } from "react-router-dom";
 import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
 import { useState, useEffect, useMemo, useReducer } from "react";
-
 import Settings from "./components/Settings";
 import Home from "./components/Home";
 import { Emoji } from "./contexts/changeEmoji";
 import { Handles } from "./contexts/handles";
 import { State_of_List } from "./contexts/State_of_List";
+import EmojiRedu from "./reducers/EmojiRedu";
 import todoRedu from "./reducers/todoRedu";
 const App = () => {
   // hooks
-  const [emoji, setEmoji] = useState(
-    localStorage.getItem("the_data_of_emogi")
-      ? JSON.parse(localStorage.getItem("the_data_of_emogi"))
-      : { first: "👉", second: "👀", yas: "✔", no: "❌" }
-  );
-
+  const [emoji, dispatchEmo] = useReducer(EmojiRedu, {
+    first: "👉",
+    second: "👀",
+    yas: "✔",
+    no: "❌",
+  });
   const [taskvalue, dispatch] = useReducer(todoRedu, []);
   const [exit, setExit] = useState(true);
   const [exitEdit, setExitEdit] = useState(true);
@@ -32,8 +32,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("the_data_of_emogi", JSON.stringify(emoji));
-  }, [emoji]);
+    dispatchEmo({
+      type: "dataEmofromLocalStorage",
+    });
+  }, []);
   const nocheck = useMemo(() => {
     return taskvalue.filter((task) => !task.checkbox);
   }, [taskvalue]);
@@ -60,17 +62,10 @@ const App = () => {
     setExitEdit(!exitEdit);
   }
   function handleSaveClick() {
-    setEmoji({
-      first: newEmoji.first,
-      second: newEmoji.second,
-      yas: newEmoji.yas,
-      no: newEmoji.no,
-    });
+    dispatchEmo({ type: "Save", payload: { newEmoji } });
   }
   function handleShawuId(id) {
-    taskvalue.map((task1) =>
-      task1.id == id ? setNewTaxt({ value: task1.texttsak, idd: id }) : task1
-    );
+    dispatch({ type: "ShawuId", payload: { id, setNewTaxt } });
   }
   function handleCheckboxClick(id) {
     dispatch({
@@ -115,7 +110,7 @@ const App = () => {
             handleSaveClick,
           }}
         >
-          <Emoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>
+          <Emoji.Provider value={{ emoji, newEmoji, setNewEmoji }}>
             <State_of_List.Provider
               value={{ exit, setFilterButton, filterButton }}
             >

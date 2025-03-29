@@ -5,7 +5,7 @@ import { Emoji } from "../contexts/changeEmoji";
 import { useContext } from "react";
 import { Handles } from "../contexts/handles";
 const Settings = () => {
-  const { emoji, setEmoji, newEmoji, setNewEmoji } = useContext(Emoji);
+  const { emoji, newEmoji, setNewEmoji } = useContext(Emoji);
   const { handleSaveClick } = useContext(Handles);
 
   return (
