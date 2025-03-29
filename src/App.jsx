@@ -10,21 +10,22 @@ import { Emoji } from "./contexts/changeEmoji";
 import { Handles } from "./contexts/handles";
 import { State_of_List } from "./contexts/State_of_List";
 const App = () => {
-  const [exit, setExit] = useState(true);
-  const [exitEdit, setExitEdit] = useState(true);
+  // hooks
   const [emoji, setEmoji] = useState(
     localStorage.getItem("the_data_of_emogi")
       ? JSON.parse(localStorage.getItem("the_data_of_emogi"))
       : { first: "👉", second: "👀", yas: "✔", no: "❌" }
   );
-  const [newEmoji, setNewEmoji] = useState(emoji);
-  const [newTaxt, setNewTaxt] = useState({ value: "", idd: 0 });
-  const [filterButton, setFilterButton] = useState("all");
   const [taskvalue, setTaskvalue] = useState(
     localStorage.getItem("the_data_of_list")
       ? JSON.parse(localStorage.getItem("the_data_of_list"))
       : []
   );
+  const [exit, setExit] = useState(true);
+  const [exitEdit, setExitEdit] = useState(true);
+  const [newEmoji, setNewEmoji] = useState(emoji);
+  const [newTaxt, setNewTaxt] = useState({ value: "", idd: 0 });
+  const [filterButton, setFilterButton] = useState("all");
 
   useEffect(() => {
     window.localStorage.setItem("the_data_of_list", JSON.stringify(taskvalue));
@@ -32,7 +33,14 @@ const App = () => {
   useEffect(() => {
     window.localStorage.setItem("the_data_of_emogi", JSON.stringify(emoji));
   }, [emoji]);
+  const nocheck = useMemo(() => {
+    return taskvalue.filter((task) => !task.checkbox);
+  }, [taskvalue]);
 
+  const check = useMemo(() => {
+    return taskvalue.filter((task) => task.checkbox);
+  }, [taskvalue]);
+  // ====== hooks=====
   function handleAlertTaxt() {
     setExit(!exit);
   }
@@ -51,6 +59,14 @@ const App = () => {
       )
     );
     setExitEdit(!exitEdit);
+  }
+  function handleSaveClick() {
+    setEmoji({
+      first: newEmoji.first,
+      second: newEmoji.second,
+      yas: newEmoji.yas,
+      no: newEmoji.no,
+    });
   }
   function shawuId(id) {
     taskvalue.map((task1) =>
@@ -78,13 +94,6 @@ const App = () => {
       },
     ]);
   }
-  const nocheck = useMemo(() => {
-    return taskvalue.filter((task) => !task.checkbox);
-  }, [taskvalue]);
-
-  const check = useMemo(() => {
-    return taskvalue.filter((task) => task.checkbox);
-  }, [taskvalue]);
 
   let finalfilter = taskvalue;
   if (filterButton == "non") {
@@ -116,6 +125,7 @@ const App = () => {
             handleDeletTaskClick,
             handleAlertEdit,
             shawuId,
+            handleSaveClick,
           }}
         >
           <Emoji.Provider value={{ emoji, setEmoji, newEmoji, setNewEmoji }}>

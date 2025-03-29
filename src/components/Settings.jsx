@@ -3,17 +3,11 @@ import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Emoji } from "../contexts/changeEmoji";
 import { useContext } from "react";
+import { Handles } from "../contexts/handles";
 const Settings = () => {
   const { emoji, setEmoji, newEmoji, setNewEmoji } = useContext(Emoji);
+  const { handleSaveClick } = useContext(Handles);
 
-  function handleSaveClick() {
-    setEmoji({
-      first: newEmoji.first,
-      second: newEmoji.second,
-      yas: newEmoji.yas,
-      no: newEmoji.no,
-    });
-  }
   return (
     <div>
       <div>
@@ -79,7 +73,9 @@ const Settings = () => {
             />
           </div>
           <div className=" h-1/5 flex justify-between m-3 ">
-            <div className="mt-8 text-gray-400 text-xs md:text-base lg:text-lg">Press ' Win + . ' for emoji 😊 </div>
+            <div className="mt-8 text-gray-400 text-xs md:text-base lg:text-lg">
+              Press ' Win + . ' for emoji 😊{" "}
+            </div>
 
             <div className=" flex justify-end mt-6    ">
               <Link to="/">
