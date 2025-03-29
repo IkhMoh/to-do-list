@@ -2,13 +2,14 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import EditTaxt from "./components/EditTaxt";
 import InputTaxt from "./components/InputTaxt";
-import { useState, useEffect, useMemo } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState, useEffect, useMemo, useReducer } from "react";
+
 import Settings from "./components/Settings";
 import Home from "./components/Home";
 import { Emoji } from "./contexts/changeEmoji";
 import { Handles } from "./contexts/handles";
 import { State_of_List } from "./contexts/State_of_List";
+import todoRedu from "./reducers/todoRedu";
 const App = () => {
   // hooks
   const [emoji, setEmoji] = useState(
@@ -16,11 +17,8 @@ const App = () => {
       ? JSON.parse(localStorage.getItem("the_data_of_emogi"))
       : { first: "👉", second: "👀", yas: "✔", no: "❌" }
   );
-  const [taskvalue, setTaskvalue] = useState(
-    localStorage.getItem("the_data_of_list")
-      ? JSON.parse(localStorage.getItem("the_data_of_list"))
-      : []
-  );
+
+  const [taskvalue, dispatch] = useReducer(todoRedu, []);
   const [exit, setExit] = useState(true);
   const [exitEdit, setExitEdit] = useState(true);
   const [newEmoji, setNewEmoji] = useState(emoji);
@@ -28,36 +26,37 @@ const App = () => {
   const [filterButton, setFilterButton] = useState("all");
 
   useEffect(() => {
-    window.localStorage.setItem("the_data_of_list", JSON.stringify(taskvalue));
-  }, [taskvalue]);
+    dispatch({
+      type: "dataFromloLocalStorage",
+    });
+  }, []);
+
   useEffect(() => {
     window.localStorage.setItem("the_data_of_emogi", JSON.stringify(emoji));
   }, [emoji]);
   const nocheck = useMemo(() => {
     return taskvalue.filter((task) => !task.checkbox);
   }, [taskvalue]);
-
   const check = useMemo(() => {
     return taskvalue.filter((task) => task.checkbox);
   }, [taskvalue]);
   // ====== hooks=====
+
+  // handlers functions
   function handleAlertTaxt() {
     setExit(!exit);
   }
   function handleAlertEdit() {
     setExitEdit(!exitEdit);
   }
-
   function handleDeletTaskClick(id) {
-    setTaskvalue(taskvalue.filter((task1) => task1.id !== id));
+    dispatch({ type: "delete", payload: { id } });
   }
-
   function handleEditClick() {
-    setTaskvalue(
-      taskvalue.map((task1) =>
-        task1.id == newTaxt.idd ? { ...task1, texttsak: newTaxt.value } : task1
-      )
-    );
+    dispatch({
+      type: "edit",
+      payload: { id: newTaxt.idd, text: newTaxt.value },
+    });
     setExitEdit(!exitEdit);
   }
   function handleSaveClick() {
@@ -68,33 +67,21 @@ const App = () => {
       no: newEmoji.no,
     });
   }
-  function shawuId(id) {
+  function handleShawuId(id) {
     taskvalue.map((task1) =>
       task1.id == id ? setNewTaxt({ value: task1.texttsak, idd: id }) : task1
     );
   }
-
   function handleCheckboxClick(id) {
-    setTaskvalue(
-      taskvalue.map((task1) =>
-        task1.id == id ? { ...task1, checkbox: !task1.checkbox } : task1
-      )
-    );
+    dispatch({
+      type: "checkbox",
+      payload: { id },
+    });
   }
   function handleSupmitClick(newTaxt) {
-    const now = new Date();
-    setTaskvalue([
-      ...taskvalue,
-      {
-        id: uuidv4(),
-        texttsak: newTaxt,
-        time: now.toLocaleTimeString(),
-        year: now.toLocaleDateString(),
-        checkbox: false,
-      },
-    ]);
+    dispatch({ type: "add", payload: { newTaxt } });
   }
-
+  // ============ handlers functions =====
   let finalfilter = taskvalue;
   if (filterButton == "non") {
     finalfilter = nocheck;
@@ -124,7 +111,7 @@ const App = () => {
             handleCheckboxClick,
             handleDeletTaskClick,
             handleAlertEdit,
-            shawuId,
+            handleShawuId,
             handleSaveClick,
           }}
         >

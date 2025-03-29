@@ -6,7 +6,7 @@ import { Handles } from "../contexts/handles";
 const Task = ({ task }) => {
   const { emoji } = useContext(Emoji);
   const {
-    shawuId,
+    handleShawuId,
     handleAlertEdit,
     handleDeletTaskClick,
     handleCheckboxClick,
@@ -44,7 +44,7 @@ const Task = ({ task }) => {
         <span>
           <FiEdit3
             onClick={() => {
-              handleAlertEdit(), shawuId(task.id);
+              handleAlertEdit(), handleShawuId(task.id);
             }}
             className="w-7 h-7 md:w-8 md:h-8 text-[var(--text)] bg-[var(--graylite)] mr-2 sm:mr-0 p-1 sm:p-1.5 rounded cursor-pointer hover:drop-shadow transition"
           />
