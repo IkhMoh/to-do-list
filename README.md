@@ -42,4 +42,4 @@ The **To-Do List** app is a simple web application that helps you manage your da
 
 ---
 
-✨ Don't forget to ⭐ the project on GitHub if you liked it! 🚀
+✨ Don't forget to ⭐ the project on GitHub if you liked it! 
